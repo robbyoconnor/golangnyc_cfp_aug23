@@ -10,6 +10,8 @@ import (
 	"github.com/gobuffalo/mw-i18n"
 	"github.com/gobuffalo/packr"
 	"github.com/robbyoconnor/golangnyc_cfp_aug23/models"
+
+	"github.com/markbates/goth/gothic"
 )
 
 // ENV is used to help switch settings based on where the
@@ -57,6 +59,15 @@ func App() *buffalo.App {
 
 		app.GET("/", HomeHandler)
 		app.Resource("/talks", TalksResource{})
+		auth := app.Group("/auth")
+		app.Use(SetCurrentUser)
+		app.Use(Authorize)
+		app.Middleware.Skip(Authorize, HomeHandler)
+		bah := buffalo.WrapHandlerFunc(gothic.BeginAuthHandler)
+		auth.GET("/{provider}", bah)
+		auth.DELETE("", AuthDestroy)
+		auth.Middleware.Skip(Authorize, bah, AuthCallback)
+		auth.GET("/{provider}/callback", AuthCallback)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
