@@ -1,0 +1,6 @@
+- id: "talk.created.success"
+  translation: "Talk was successfully created."
+- id: "talk.updated.success"
+  translation: "Talk was successfully updated."
+- id: "talk.destroyed.success"
+  translation: "Talk was successfully destroyed."

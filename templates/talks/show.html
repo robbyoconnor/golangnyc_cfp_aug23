@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h1>Talk#Show</h1>
+</div>
+
+<ul class="list-unstyled list-inline">
+  <li class="list-inline-item"><a href="<%= talksPath() %>" class="btn btn-info">Back to all Talks</a></li>
+  <li class="list-inline-item"><a href="<%= editTalkPath({ talk_id: talk.ID })%>" class="btn btn-warning">Edit</a></li>
+  <li class="list-inline-item"><a href="<%= talkPath({ talk_id: talk.ID })%>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+</ul>
+
+<p>
+  <strong>Title</strong>: <%= talk.Title %>
+</p>
+<p>
+  <strong>Abstract</strong>: <%= talk.Abstract %>
+</p>
+<p>
+  <strong>Description</strong>: <%= talk.Description %>
+</p>
+<p>
+  <strong>UserID</strong>: <%= talk.UserID %>
+</p>
